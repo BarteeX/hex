@@ -1,0 +1,42 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: postgres_hex_ddd
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+      PGDATA: /data/postgres
+    ports:
+      - '6543:5432'
+    networks:
+      - postgres
+    volumes:
+      - postgres:/data/postgres
+    restart: unless-stopped
+  redis:
+    image: 'redis:latest'
+    container_name: redis_hex_ddd
+    ports:
+      - '6379'
+  pg-admin:
+    image: 'dpage/pgadmin4'
+    container_name: pgadmin_container_hex_ddd
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - '5050:80'
+    networks:
+      - postgres
+    restart: unless-stopped
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+networks:
+  postgres:
+    driver: bridge
+volumes:
+  postgres:
+    driver: local
+  pgadmin:
+    driver: local
