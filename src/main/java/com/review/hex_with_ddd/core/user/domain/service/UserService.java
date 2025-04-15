@@ -5,6 +5,8 @@ import com.review.hex_with_ddd.core.user.domain.model.UserId;
 import com.review.hex_with_ddd.core.user.domain.port.UserRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 public class UserService {
 
@@ -14,8 +16,16 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User findById(UserId userIdDto) {
-        return null;
+    public Optional<User> findById(UserId userId) {
+        return userRepository.findById(userId);
+    }
+
+    public void delete(UserId userId) {
+        userRepository.deleteById(userId);
+    }
+
+    public boolean exists(UserId userId) {
+        return userRepository.existsById(userId);
     }
 
 }

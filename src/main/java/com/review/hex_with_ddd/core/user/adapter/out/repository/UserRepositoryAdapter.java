@@ -9,6 +9,9 @@ import com.review.hex_with_ddd.core.user.infrastructure.adapter.entity.UserDB;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @RequiredArgsConstructor
 public class UserRepositoryAdapter
       implements UserRepository {
@@ -22,7 +25,26 @@ public class UserRepositoryAdapter
     public UserId save(User user) {
         UserDB dbModel = userDBMapper.toDbModel(user);
         UserDB savedUser = userRepository.save(dbModel);
-        return userDBMapper.toModel(savedUser);
+        return userDBMapper.toModelId(savedUser);
+    }
+
+    @Override
+    public Optional<User> findById(UserId userId) {
+        UUID uuid = userDBMapper.toUUID(userId);
+        Optional<UserDB> byId = userRepository.findById(uuid);
+        return byId.map(userDBMapper::toModel);
+    }
+
+    @Override
+    public void deleteById(UserId userId) {
+        UUID uuid = userDBMapper.toUUID(userId);
+        userRepository.deleteById(uuid);
+    }
+
+    @Override
+    public boolean existsById(UserId userId) {
+        UUID uuid = userDBMapper.toUUID(userId);
+        return userRepository.existsById(uuid);
     }
 
 }

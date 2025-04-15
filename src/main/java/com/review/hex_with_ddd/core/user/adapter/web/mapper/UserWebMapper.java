@@ -4,6 +4,7 @@ import com.review.hex_with_ddd.core.user.adapter.web.request.AddUserRequest;
 import com.review.hex_with_ddd.core.user.adapter.web.response.NewUserIdResponse;
 import com.review.hex_with_ddd.core.user.adapter.web.response.UserResponse;
 import com.review.hex_with_ddd.core.user.application.command.AddUserCommand;
+import com.review.hex_with_ddd.core.user.application.command.DeleteUserCommand;
 import com.review.hex_with_ddd.core.user.application.command.GetUserQuery;
 import com.review.hex_with_ddd.core.user.application.dto.UserDto;
 import com.review.hex_with_ddd.core.user.application.dto.UserIdDto;
@@ -30,5 +31,11 @@ public interface UserWebMapper {
           source = "uuid"
     )
     GetUserQuery toQuery(UUID uuid);
+
+    @Mapping(
+          target = "userId.id",
+          source = "uuid"
+    )
+    DeleteUserCommand toDeleteCommand(UUID uuid);
 
 }
