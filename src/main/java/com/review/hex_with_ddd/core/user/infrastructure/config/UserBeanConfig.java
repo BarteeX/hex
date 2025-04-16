@@ -12,7 +12,7 @@ import com.review.hex_with_ddd.core.user.application.usecase.DeleteUserUseCase;
 import com.review.hex_with_ddd.core.user.application.usecase.GetUserUseCase;
 import com.review.hex_with_ddd.core.user.domain.port.UserRepository;
 import com.review.hex_with_ddd.core.user.domain.service.UserService;
-import com.review.hex_with_ddd.core.user.infrastructure.adapter.UserDbRepository;
+import com.review.hex_with_ddd.core.user.infrastructure.db.UserDbRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;

@@ -2,7 +2,7 @@ package com.review.hex_with_ddd.core.user.adapter.out.mapper;
 
 import com.review.hex_with_ddd.core.user.domain.model.User;
 import com.review.hex_with_ddd.core.user.domain.model.UserId;
-import com.review.hex_with_ddd.core.user.infrastructure.adapter.entity.UserDB;
+import com.review.hex_with_ddd.core.user.infrastructure.db.entity.UserDB;
 import org.mapstruct.Mapper;
 
 import java.util.UUID;

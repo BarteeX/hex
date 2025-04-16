@@ -4,8 +4,8 @@ import com.review.hex_with_ddd.core.user.adapter.out.mapper.UserDBMapper;
 import com.review.hex_with_ddd.core.user.domain.model.User;
 import com.review.hex_with_ddd.core.user.domain.model.UserId;
 import com.review.hex_with_ddd.core.user.domain.port.UserRepository;
-import com.review.hex_with_ddd.core.user.infrastructure.adapter.UserDbRepository;
-import com.review.hex_with_ddd.core.user.infrastructure.adapter.entity.UserDB;
+import com.review.hex_with_ddd.core.user.infrastructure.db.UserDbRepository;
+import com.review.hex_with_ddd.core.user.infrastructure.db.entity.UserDB;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 

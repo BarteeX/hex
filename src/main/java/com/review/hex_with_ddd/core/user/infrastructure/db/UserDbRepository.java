@@ -1,6 +1,6 @@
-package com.review.hex_with_ddd.core.user.infrastructure.adapter;
+package com.review.hex_with_ddd.core.user.infrastructure.db;
 
-import com.review.hex_with_ddd.core.user.infrastructure.adapter.entity.UserDB;
+import com.review.hex_with_ddd.core.user.infrastructure.db.entity.UserDB;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

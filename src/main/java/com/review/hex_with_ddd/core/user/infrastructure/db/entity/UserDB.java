@@ -1,4 +1,4 @@
-package com.review.hex_with_ddd.core.user.infrastructure.adapter.entity;
+package com.review.hex_with_ddd.core.user.infrastructure.db.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
