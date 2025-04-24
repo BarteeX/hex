@@ -4,52 +4,92 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
 }
 
+dependencyManagement {
+    imports {
+        mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+    }
+}
+
 group = "com.review"
-version = "0.0.1-SNAPSHOT"
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
-    }
-}
+version = "0.0.1-dev"
+extra["springModulithVersion"] = "1.3.4"
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+subprojects {
+    println("Configuring subproject: ${project.name}")
 
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
-    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
-    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
+    group = rootProject.group
+    version = rootProject.version
 
-    implementation("org.mapstruct:mapstruct:1.6.3")
-    annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
-    annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
+    apply(plugin = "java")
+    apply(plugin = "org.springframework.boot")
+    apply(plugin = "io.spring.dependency-management")
 
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
 
-    developmentOnly("org.springframework.boot:spring-boot-docker-compose")
+    configurations {
+        compileOnly {
+            extendsFrom(configurations.annotationProcessor.get())
+        }
+    }
 
-    runtimeOnly("org.postgresql:postgresql")
+    repositories {
+        mavenCentral()
+    }
 
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
+    dependencies {
+        compileOnly("org.projectlombok:lombok")
+        annotationProcessor("org.projectlombok:lombok")
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+        implementation("org.mapstruct:mapstruct:1.6.3")
+        annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
+        annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
+
+        implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
+
+        implementation("org.springframework.modulith:spring-modulith-starter-core")
+        testImplementation("org.springframework.modulith:spring-modulith-starter-test")
+
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+            mavenBom("org.springframework.modulith:spring-modulith-bom:${property("springModulithVersion")}")
+        }
+    }
+
+    tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+        enabled = false
+    }
+
+    tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
+        enabled = false
+    }
+
+    tasks.named<Jar>("jar") {
+        enabled = true
+    }
+
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+    mainClass.set("com.review.Application")
+}
+
+tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
+    mainClass.set("com.review.Application")
 }
