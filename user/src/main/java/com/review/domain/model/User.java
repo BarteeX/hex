@@ -1,12 +1,14 @@
 package com.review.domain.model;
 
 
+import com.review.domain.FirstName;
+import com.review.domain.LastName;
+import com.review.domain.UserId;
+import com.review.domain.Username;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,12 +16,12 @@ import java.util.UUID;
 @Setter
 public class User {
 
-    private UUID id;
+    private UserId id;
 
-    private String username;
+    private Username username;
 
-    private String firstName;
+    private FirstName firstName;
 
-    private String lastName;
+    private LastName lastName;
 
 }

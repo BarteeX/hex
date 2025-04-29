@@ -1,7 +1,8 @@
 package com.review.domain.service;
 
+import com.review.domain.Password;
+import com.review.domain.UserId;
 import com.review.domain.model.AuthenticationUser;
-import com.review.domain.model.AuthenticationUserId;
 import com.review.domain.port.AuthenticationPasswordEncoder;
 import com.review.domain.repository.AuthenticationUserRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,30 +17,21 @@ public class AuthenticationUserService {
     private final AuthenticationPasswordEncoder passwordEncoder;
 
     public AuthenticationUser createUser(AuthenticationUser user) {
-        String encoded = getEncodedPassword(user);
-        user.setPassword(encoded);
+        Password password = user.getPassword();
+
+        user.setEncodedPassword(password, passwordEncoder::encode);
 
         return userRepository.save(user);
     }
 
     public boolean isPasswordValid(AuthenticationUser user) {
-        AuthenticationUserId id = user.getId();
+        UserId id = user.getId();
         Optional<AuthenticationUser> byId = userRepository.findById(id);
 
-        return byId.map((existing) -> isPasswordMatch(existing, user))
+        Password candidatePassword = user.getPassword();
+
+        return byId.map((existing) -> existing.isPasswordValid(candidatePassword, passwordEncoder::matches))
               .orElse(false);
-    }
-
-    private String getEncodedPassword(AuthenticationUser user) {
-        String password = user.getPassword();
-        return passwordEncoder.encode(password);
-    }
-
-    private boolean isPasswordMatch(AuthenticationUser existing, AuthenticationUser candidate) {
-        String encodedPassword = existing.getPassword();
-        String rawPassword = candidate.getPassword();
-
-        return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
 }

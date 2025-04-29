@@ -1,7 +1,7 @@
 package com.review.domain.service;
 
+import com.review.domain.UserId;
 import com.review.domain.model.User;
-import com.review.domain.model.UserId;
 import com.review.domain.port.UserRepository;
 import lombok.RequiredArgsConstructor;
 

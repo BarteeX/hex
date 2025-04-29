@@ -1,8 +1,8 @@
 package com.review.adapter.out.repository;
 
 import com.review.adapter.out.mapper.UserDBMapper;
+import com.review.domain.UserId;
 import com.review.domain.model.User;
-import com.review.domain.model.UserId;
 import com.review.domain.port.UserRepository;
 import com.review.infrastructure.db.UserDbRepository;
 import com.review.infrastructure.db.entity.UserDB;

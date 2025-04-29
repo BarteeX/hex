@@ -5,9 +5,9 @@ import com.review.adapter.web.response.NewUserIdResponse;
 import com.review.adapter.web.response.UserResponse;
 import com.review.application.command.AddUserCommand;
 import com.review.application.command.DeleteUserCommand;
-import com.review.application.command.GetUserQuery;
 import com.review.application.dto.UserDto;
 import com.review.application.dto.UserIdDto;
+import com.review.application.query.GetUserQuery;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

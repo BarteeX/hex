@@ -1,5 +1,6 @@
 package com.review.domain.model;
 
+import com.review.domain.Token;
 import lombok.*;
 
 @AllArgsConstructor
@@ -9,6 +10,6 @@ import lombok.*;
 @EqualsAndHashCode
 public class AuthenticationUserToken {
 
-    private String token;
+    private Token token;
 
 }

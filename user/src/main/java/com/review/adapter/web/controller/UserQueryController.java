@@ -2,8 +2,8 @@ package com.review.adapter.web.controller;
 
 import com.review.adapter.web.mapper.UserWebMapper;
 import com.review.adapter.web.response.UserResponse;
-import com.review.application.command.GetUserQuery;
 import com.review.application.dto.UserDto;
+import com.review.application.query.GetUserQuery;
 import com.review.application.usecase.GetUserUseCase;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;

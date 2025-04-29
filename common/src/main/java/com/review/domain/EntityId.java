@@ -1,12 +1,10 @@
 package com.review.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+public abstract class EntityId<T>
+      extends ValueObject<T> {
 
-@Getter
-@AllArgsConstructor
-public abstract class EntityId<T> {
-
-    private T id;
+    protected EntityId(T value) {
+        super(value);
+    }
 
 }

@@ -8,8 +8,8 @@ import com.review.application.mapper.UserMapper;
 import com.review.application.usecase.AddUserUseCase;
 import com.review.application.usecase.DeleteUserUseCase;
 import com.review.domain.UnitOfWork;
+import com.review.domain.UserId;
 import com.review.domain.model.User;
-import com.review.domain.model.UserId;
 import com.review.domain.service.UserService;
 import lombok.RequiredArgsConstructor;
 
