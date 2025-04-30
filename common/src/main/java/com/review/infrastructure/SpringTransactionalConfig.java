@@ -6,7 +6,7 @@ import com.review.domain.UnitOfWork;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class SpringTransactionalConfig {
 
     @Bean

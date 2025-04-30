@@ -20,10 +20,16 @@ public class UserDB {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(
+          unique = true,
+          nullable = false
+    )
     private String username;
 
+    @Column(nullable = false)
     private String firstName;
 
+    @Column(nullable = false)
     private String lastName;
 
 }

@@ -32,4 +32,8 @@ public class ValueObjectMapper {
         return Password.of(value);
     }
 
+    public ErrorMessage toErrorMessage(String value) {
+        return ErrorMessage.of(value);
+    }
+
 }

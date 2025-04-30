@@ -1,6 +1,7 @@
 package com.review.domain.service;
 
 import com.review.domain.UserId;
+import com.review.domain.Username;
 import com.review.domain.model.User;
 import com.review.domain.port.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,10 @@ public class UserService {
 
     public Optional<User> findById(UserId userId) {
         return userRepository.findById(userId);
+    }
+
+    public Optional<User> findByUsername(Username username) {
+        return userRepository.findByUsername(username);
     }
 
     public void delete(UserId userId) {

@@ -3,6 +3,7 @@ dependencies {
     implementation(project(":authentication"))
     implementation(project(":user"))
     implementation(project(":offer"))
+    implementation(project(":user-authentication"))
 
     implementation("org.springframework.boot:spring-boot-starter")
 

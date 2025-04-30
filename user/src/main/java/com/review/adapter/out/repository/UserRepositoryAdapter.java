@@ -2,6 +2,7 @@ package com.review.adapter.out.repository;
 
 import com.review.adapter.out.mapper.UserDBMapper;
 import com.review.domain.UserId;
+import com.review.domain.Username;
 import com.review.domain.model.User;
 import com.review.domain.port.UserRepository;
 import com.review.infrastructure.db.UserDbRepository;
@@ -33,6 +34,13 @@ public class UserRepositoryAdapter
         UUID uuid = userDBMapper.toUUID(userId);
         Optional<UserDB> byId = userRepository.findById(uuid);
         return byId.map(userDBMapper::toModel);
+    }
+
+    @Override
+    public Optional<User> findByUsername(Username username) {
+        String value = userDBMapper.toString(username);
+        Optional<UserDB> byUsername = userRepository.findByUsername(value);
+        return byUsername.map(userDBMapper::toModel);
     }
 
     @Override

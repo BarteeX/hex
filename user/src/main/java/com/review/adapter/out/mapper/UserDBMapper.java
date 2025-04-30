@@ -2,6 +2,7 @@ package com.review.adapter.out.mapper;
 
 import com.review.application.ValueObjectMapper;
 import com.review.domain.UserId;
+import com.review.domain.Username;
 import com.review.domain.model.User;
 import com.review.infrastructure.db.entity.UserDB;
 import org.mapstruct.Mapper;
@@ -19,7 +20,7 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 public interface UserDBMapper {
 
     default UserId toModelId(UserDB userEntity) {
-        UUID id = userEntity.getId();
+        UUID id = userEntity == null ? null : userEntity.getId();
         return UserId.of(id);
     }
 
@@ -28,7 +29,11 @@ public interface UserDBMapper {
     UserDB toDbModel(User user);
 
     default UUID toUUID(UserId userId) {
-        return userId.getValue();
+        return userId == null ? null : userId.getValue();
+    }
+
+    default String toString(Username username) {
+        return username == null ? null : username.getValue();
     }
 
 }

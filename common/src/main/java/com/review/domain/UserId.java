@@ -17,4 +17,8 @@ public class UserId
         return new UserId(id);
     }
 
+    public static UserId random() {
+        return new UserId(UUID.randomUUID());
+    }
+
 }

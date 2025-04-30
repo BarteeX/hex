@@ -3,12 +3,14 @@ package com.review.application.handler;
 import com.review.application.command.AddUserCommand;
 import com.review.application.command.DeleteUserCommand;
 import com.review.application.dto.UserIdDto;
+import com.review.application.exception.UserAlreadyExistsException;
 import com.review.application.exception.UserNotFoundException;
 import com.review.application.mapper.UserMapper;
 import com.review.application.usecase.AddUserUseCase;
 import com.review.application.usecase.DeleteUserUseCase;
 import com.review.domain.UnitOfWork;
 import com.review.domain.UserId;
+import com.review.domain.Username;
 import com.review.domain.model.User;
 import com.review.domain.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,12 @@ public class UserCommandHandler
     public UserIdDto execute(AddUserCommand command) {
         return unitOfWork.run(() -> {
             User model = userMapper.toModel(command);
+            Username username = model.getUsername();
+            userService.findByUsername(username)
+                  .ifPresent((__) -> {
+                      throw UserAlreadyExistsException.of(username);
+                  });
+
             UserId userId = userService.save(model);
             return userMapper.toUserIdDto(userId);
         });

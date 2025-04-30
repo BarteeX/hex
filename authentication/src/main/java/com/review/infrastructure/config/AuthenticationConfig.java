@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class AuthenticationConfig {
 
     @Bean
